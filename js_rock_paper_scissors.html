@@ -1,6 +1,55 @@
 <script type="text/javascript">
+
+	let options = ['rock', 'paper', 'scissors'];
+
 	function computerPlay(){
-		let options = [1,2,3]
-		
+		let number = Math.round((Math.random()*2));
+		console.log(number);
+		return options[number];
 	}
+
+	function playRound(playerSelection, computerSelection){
+		if(playerSelection == computerSelection){
+			console.log("It is a tie!");
+			return 0;
+		}
+		else if((playerSelection == options[0] && computerSelection == options[1])||
+				(playerSelection == options[1] && computerSelection == options[2])||
+				(playerSelection == options[2] && computerSelection == options[0]))
+		{
+			console.log(`You lose! Computer selection ${computerSelection} beats ${playerSelection}`);
+			return 1;
+		}
+		else{
+			console.log(`You win this round! Player selection ${playerSelection} beats ${computerSelection}`);
+			return 2;
+		}
+	}
+
+	function game(){
+		let playerScore = 0;
+		let computerScore = 0;
+		let playerSelection, computerSelection, roundResult;
+		while(playerScore!=5&&computerScore!=5){
+			playerSelection = prompt("Please choose between rock, paper, scissors, spelling matters");
+			playerSelection = playerSelection.toLowerCase();
+			computerSelection = computerPlay();
+			switch(playRound(playerSelection, computerSelection)){
+				case 0:
+					break;
+				case 1:
+					computerScore+=1;
+					break;
+				case 2:
+					playerScore+=1;
+			}
+		}
+		if(playerScore==5){
+			console.log("You win!");
+		}
+		else{
+			console.log("You lose!");
+		}
+	}
+
 </script>
